@@ -372,21 +372,15 @@
     background: var(--lilac);
   }
 
-  .photo-card:nth-child(1) { grid-column: span 2; }
-  .photo-card:nth-child(4) { grid-column: span 2; }
-
   .photo-img {
     width: 100%;
-    aspect-ratio: 4/3;
+    aspect-ratio: 3/4;
     background: linear-gradient(135deg, var(--lilac-dark), var(--lilac));
     display: flex;
     align-items: center;
     justify-content: center;
     transition: transform 0.5s ease;
   }
-
-  .photo-card:nth-child(1) .photo-img,
-  .photo-card:nth-child(4) .photo-img { aspect-ratio: 16/7; }
 
   .photo-card:hover .photo-img { transform: scale(1.05); }
 
@@ -805,9 +799,7 @@
     #research-projects { padding: 0 1.5rem 5rem; }
     footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
 
-    .photo-grid { grid-template-columns: 1fr; }
-    .photo-card:nth-child(1),
-    .photo-card:nth-child(4) { grid-column: span 1; }
+    .photo-grid { grid-template-columns: 1fr 1fr; }
 
     .fashion-grid { grid-template-columns: 1fr; }
 
@@ -818,9 +810,7 @@
   @media (max-width: 1024px) and (min-width: 769px) {
     #photography, #fashion, #experience, #research-projects, #contact { padding: 6rem 2.5rem; }
     #research-projects { padding: 0 2.5rem 6rem; }
-    .photo-grid { grid-template-columns: 1fr 1fr; }
-    .photo-card:nth-child(1),
-    .photo-card:nth-child(4) { grid-column: span 2; }
+    .photo-grid { grid-template-columns: 1fr 1fr 1fr; }
     .fashion-grid { grid-template-columns: 1fr 1fr; }
   }
 </style>
@@ -883,12 +873,11 @@
   </div>
 
   <div class="photo-grid">
-    <!-- Card 1 — wide -->
-    <div class="photo-card reveal reveal-delay-1" data-ratio="3:4">
+    <!-- Card 1 -->
+    <div class="photo-card reveal reveal-delay-1">
       <div class="photo-img">
-       <img src="/images/photography/night.png" alt="Description"
-     style="width:100%;height:100%;object-fit:cover;" />
-        </div>
+        <img src="/images/photography/night.png" alt="Nightfall Reflection"
+          style="width:100%;height:100%;object-fit:cover;" />
       </div>
       <div class="photo-caption">
         <h3>Nightfall Reflection</h3>
@@ -897,7 +886,7 @@
     </div>
 
     <!-- Card 2 -->
-    <div class="photo-card reveal reveal-delay-2" data-ratio="3:4">
+    <div class="photo-card reveal reveal-delay-2">
       <div class="photo-img">
         <div class="photo-img-inner">
           <svg viewBox="0 0 24 24" fill="none" stroke="#4a2e2c" stroke-width="1.2">
@@ -914,7 +903,7 @@
     </div>
 
     <!-- Card 3 -->
-    <div class="photo-card reveal reveal-delay-3" data-ratio="3:4">
+    <div class="photo-card reveal reveal-delay-3">
       <div class="photo-img">
         <div class="photo-img-inner">
           <svg viewBox="0 0 24 24" fill="none" stroke="#4a2e2c" stroke-width="1.2">
@@ -930,8 +919,8 @@
       </div>
     </div>
 
-    <!-- Card 4 — wide -->
-    <div class="photo-card reveal reveal-delay-4" data-ratio="4:3">
+    <!-- Card 4 -->
+    <div class="photo-card reveal reveal-delay-1">
       <div class="photo-img">
         <div class="photo-img-inner">
           <svg viewBox="0 0 24 24" fill="none" stroke="#4a2e2c" stroke-width="1.2">
@@ -948,7 +937,7 @@
     </div>
 
     <!-- Card 5 -->
-    <div class="photo-card reveal reveal-delay-3" data-ratio="4:3">
+    <div class="photo-card reveal reveal-delay-2">
       <div class="photo-img">
         <div class="photo-img-inner">
           <svg viewBox="0 0 24 24" fill="none" stroke="#4a2e2c" stroke-width="1.2">
@@ -961,6 +950,74 @@
       <div class="photo-caption">
         <h3>Soft Light</h3>
         <p>Abstract · Minimal</p>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="photo-card reveal reveal-delay-3">
+      <div class="photo-img">
+        <div class="photo-img-inner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4a2e2c" stroke-width="1.2">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="12" cy="12" r="4"/>
+            <path d="M8 4l1-2h6l1 2"/>
+          </svg>
+          <span>Image Placeholder</span>
+        </div>
+      </div>
+      <div class="photo-caption">
+        <h3>Golden Hour</h3>
+        <p>Nature · Mood Photography</p>
+      </div>
+    </div>
+
+    <!-- Card 7 -->
+    <div class="photo-card reveal reveal-delay-1">
+      <div class="photo-img">
+        <div class="photo-img-inner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4a2e2c" stroke-width="1.2">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="12" cy="12" r="4"/>
+            <path d="M8 4l1-2h6l1 2"/>
+          </svg>
+          <span>Image Placeholder</span>
+        </div>
+      </div>
+      <div class="photo-caption">
+        <h3>Still Waters</h3>
+        <p>Landscape · Reflection</p>
+      </div>
+    </div>
+
+    <!-- Card 8 -->
+    <div class="photo-card reveal reveal-delay-2">
+      <div class="photo-img">
+        <div class="photo-img-inner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4a2e2c" stroke-width="1.2">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="12" cy="12" r="4"/>
+            <path d="M8 4l1-2h6l1 2"/>
+          </svg>
+          <span>Image Placeholder</span>
+        </div>
+      </div>
+      <div class="photo-caption">
+        <h3>City Fog</h3>
+        <p>Urban · Atmosphere</p>
+      </div>
+    </div>
+
+    <!-- Card 9 -->
+    <div class="photo-card reveal reveal-delay-3">
+      <div class="photo-img">
+        <div class="photo-img-inner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4a2e2c" stroke-width="1.2">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="12" cy="12" r="4"/>
+            <path d="M8 4l1-2h6l1 2"/>
+          </svg>
+          <span>Image Placeholder</span>
+        </div>
+      </div>
+      <div class="photo-caption">
+        <h3>Fade to Silence</h3>
+        <p>Fine Art · Conceptual</p>
       </div>
     </div>
   </div>
