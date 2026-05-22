@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Zae's Creative Vault</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ebony: #2e1f1e;
+    --maroon: #7b1e19;
+    --maroon-light: #a0302a;
+    --peach: #eab274;
+    --peach-light: #f5cfa0;
+    --lilac: #d2cad8;
+    --lilac-dark: #b8aec6;
+    --cream: #f8f2eb;
+    --warm-white: #fdf8f3;
+    --text-dark: #1a0f0e;
+    --text-mid: #4a2e2c;
+    --font-title: 'Bebas Neue', sans-serif;
+    --font-body: 'Montserrat', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--warm-white);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 900;
+    padding: 1.2rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  nav.scrolled {
+    background: rgba(46, 31, 30, 0.88);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 1px 0 rgba(234, 178, 116, 0.15);
+  }
+
+  .nav-logo {
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
+    color: var(--peach);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--peach);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover { color: var(--peach); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-toggle { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+  .nav-toggle span { display: block; width: 24px; height: 1.5px; background: var(--cream); transition: 0.3s; }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--ebony) 0%, #3d1a19 55%, #521f1c 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 7rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #home::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(234,178,116,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-deco {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero-deco-1 {
+    width: 600px; height: 600px;
+    top: -200px; right: -200px;
+    background: radial-gradient(circle, rgba(123,30,25,0.25) 0%, transparent 70%);
+  }
+  .hero-deco-2 {
+    width: 400px; height: 400px;
+    bottom: -100px; left: -150px;
+    background: radial-gradient(circle, rgba(210,202,216,0.1) 0%, transparent 70%);
+  }
+
+  .hero-content { position: relative; z-index: 2; }
+
+  .profile-ring {
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    margin: 0 auto 2rem;
+    padding: 3px;
+    background: linear-gradient(135deg, var(--peach), var(--maroon), var(--lilac));
+    box-shadow: 0 0 40px rgba(234,178,116,0.2);
+  }
+
+  .profile-img {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #3a2221;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .profile-img-placeholder {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3a2221, #5a2e2c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .profile-img-placeholder svg { opacity: 0.4; }
+  .profile-img-placeholder span { font-size: 0.6rem; letter-spacing: 0.15em; color: rgba(248,242,235,0.4); text-transform: uppercase; }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--peach);
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: var(--font-title);
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: 0.04em;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero-title span { color: var(--peach); }
+
+  .hero-name {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--lilac);
+    margin-bottom: 1.2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-divider {
+    width: 60px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--peach), transparent);
+    margin: 1.4rem auto;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s forwards;
+  }
+
+  .hero-bio {
+    font-size: 0.92rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: rgba(248,242,235,0.7);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .cta-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 1s forwards;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 0.85rem 2.2rem;
+    background: var(--maroon);
+    color: var(--cream);
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    border: 1px solid var(--maroon);
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background: var(--maroon-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(123,30,25,0.35);
+  }
+
+  .btn-outline {
+    display: inline-block;
+    padding: 0.85rem 2.2rem;
+    background: transparent;
+    color: var(--cream);
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    border: 1px solid rgba(248,242,235,0.3);
+    transition: border-color 0.3s, transform 0.2s;
+    cursor: pointer;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--peach);
+    color: var(--peach);
+    transform: translateY(-2px);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    opacity: 0;
+    animation: fadeUp 1s 1.4s forwards;
+  }
+
+  .scroll-hint span {
+    font-size: 0.62rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(248,242,235,0.35);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(248,242,235,0.3), transparent);
+    animation: scrollPulse 2s 2s infinite;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { position: relative; }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: var(--font-title);
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: 0.04em;
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.8;
+    max-width: 520px;
+  }
+
+  .section-header { margin-bottom: 3.5rem; }
+
+  /* ── PHOTOGRAPHY ── */
+  #photography {
+    padding: 7rem 4rem;
+    background: var(--warm-white);
+  }
+
+  #photography .section-label { color: var(--maroon); }
+  #photography .section-title { color: var(--ebony); }
+  #photography .section-subtitle { color: var(--text-mid); }
+
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 1.2rem;
+  }
+
+  .photo-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: pointer;
+    background: var(--lilac);
+  }
+
+  .photo-card:nth-child(1) { grid-column: span 2; }
+  .photo-card:nth-child(4) { grid-column: span 2; }
+
+  .photo-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--lilac-dark), var(--lilac));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease;
+  }
+
+  .photo-card:nth-child(1) .photo-img,
+  .photo-card:nth-child(4) .photo-img { aspect-ratio: 16/7; }
+
+  .photo-card:hover .photo-img { transform: scale(1.05); }
+
+  .photo-img-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.45;
+  }
+
+  .photo-img-inner svg { width: 32px; height: 32px; }
+  .photo-img-inner span { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-mid); }
+
+  .photo-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem 1.2rem 1.2rem;
+    background: linear-gradient(to top, rgba(46,31,30,0.92) 0%, transparent 100%);
+    transform: translateY(10px);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+
+  .photo-card:hover .photo-caption { opacity: 1; transform: translateY(0); }
+
+  .photo-caption h3 {
+    font-family: var(--font-title);
+    font-size: 1.3rem;
+    letter-spacing: 0.06em;
+    color: var(--cream);
+    margin-bottom: 0.2rem;
+  }
+
+  .photo-caption p {
+    font-size: 0.72rem;
+    font-weight: 300;
+    color: var(--peach-light);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── FASHION ── */
+  #fashion {
+    padding: 7rem 4rem;
+    background: var(--ebony);
+    overflow: hidden;
+  }
+
+  #fashion .section-label { color: var(--peach); }
+  #fashion .section-title { color: var(--cream); }
+  #fashion .section-subtitle { color: rgba(248,242,235,0.55); }
+
+  .fashion-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .fashion-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.4s, border-color 0.3s;
+    cursor: pointer;
+  }
+
+  .fashion-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(234,178,116,0.25);
+  }
+
+  .fashion-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: linear-gradient(145deg, #3a1e1d, #4e2826);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .fashion-img::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(to top, rgba(46,31,30,0.6), transparent);
+  }
+
+  .fashion-img-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    opacity: 0.35;
+    position: relative;
+    z-index: 1;
+  }
+
+  .fashion-img-placeholder svg { width: 36px; height: 36px; color: var(--peach); }
+  .fashion-img-placeholder span { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--peach-light); }
+
+  .fashion-tag {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid rgba(234,178,116,0.35);
+    border-radius: 20px;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--peach);
+    margin: 1rem 1rem 0.5rem;
+  }
+
+  .fashion-info { padding: 0.5rem 1rem 1.4rem; }
+
+  .fashion-info h3 {
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+    letter-spacing: 0.06em;
+    color: var(--cream);
+    margin-bottom: 0.4rem;
+  }
+
+  .fashion-info p {
+    font-size: 0.78rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(248,242,235,0.5);
+  }
+
+  /* ── RESEARCH ── */
+  #research {
+    padding: 7rem 4rem;
+    background: var(--cream);
+  }
+
+  #research .section-label { color: var(--maroon); }
+  #research .section-title { color: var(--ebony); }
+  #research .section-subtitle { color: var(--text-mid); }
+
+  .research-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .research-card {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 6px;
+    border: 1px solid rgba(46,31,30,0.08);
+    border-left: 3px solid var(--maroon);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+
+  .research-card:hover {
+    transform: translateX(4px);
+    box-shadow: 0 8px 32px rgba(46,31,30,0.08);
+  }
+
+  .research-img {
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--lilac), var(--lilac-dark));
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    opacity: 0.7;
+  }
+
+  .research-img svg { width: 28px; height: 28px; color: var(--text-mid); }
+  .research-img span { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-mid); }
+
+  .research-date {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--maroon);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .research-info h3 {
+    font-family: var(--font-title);
+    font-size: 1.6rem;
+    letter-spacing: 0.04em;
+    color: var(--ebony);
+    margin-bottom: 0.35rem;
+  }
+
+  .research-info h4 {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--maroon);
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.05em;
+  }
+
+  .research-info p {
+    font-size: 0.85rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--text-mid);
+  }
+
+  /* ── CONNECT ── */
+  #contact {
+    padding: 7rem 4rem;
+    background: linear-gradient(150deg, #3a1e1d 0%, var(--ebony) 50%, #1e1219 100%);
+    text-align: center;
+  }
+
+  #contact .section-label { color: var(--peach); display: block; margin-bottom: 0.8rem; }
+  #contact .section-title { color: var(--cream); margin-bottom: 1rem; }
+  #contact .section-subtitle {
+    color: rgba(248,242,235,0.55);
+    max-width: 400px;
+    margin: 0 auto 3.5rem;
+  }
+
+  .social-row {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  .social-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.9rem 1.8rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 3px;
+    color: var(--cream);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: background 0.3s, border-color 0.3s, transform 0.2s, box-shadow 0.3s;
+  }
+
+  .social-btn:hover {
+    background: rgba(234,178,116,0.1);
+    border-color: rgba(234,178,116,0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  }
+
+  .social-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+  .linkedin-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 2.5rem;
+    background: var(--maroon);
+    color: var(--cream);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    border: 1px solid var(--maroon);
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  }
+
+  .linkedin-cta:hover {
+    background: var(--maroon-light);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(123,30,25,0.4);
+  }
+
+  .linkedin-cta svg { width: 20px; height: 20px; }
+
+  .contact-email {
+    margin-top: 2.5rem;
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: rgba(248,242,235,0.35);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2.5rem 4rem;
+    background: var(--ebony);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .footer-sig {
+    font-family: var(--font-title);
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    color: var(--peach);
+  }
+
+  .footer-tagline {
+    font-size: 0.72rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: rgba(248,242,235,0.35);
+    font-style: italic;
+  }
+
+  .footer-copy {
+    font-size: 0.65rem;
+    color: rgba(248,242,235,0.25);
+    letter-spacing: 0.08em;
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .footer-socials a {
+    color: rgba(248,242,235,0.35);
+    transition: color 0.3s;
+    display: flex;
+  }
+
+  .footer-socials a:hover { color: var(--peach); }
+  .footer-socials svg { width: 18px; height: 18px; }
+
+  /* ── REVEAL ANIMATION ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── KEYFRAMES ── */
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(20px); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+  }
+
+  /* ── MOBILE NAV ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+
+    .nav-toggle { display: flex; }
+
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(46,31,30,0.97);
+      backdrop-filter: blur(16px);
+      flex-direction: column;
+      padding: 1.5rem 2rem;
+      gap: 1.5rem;
+      border-top: 1px solid rgba(234,178,116,0.1);
+    }
+
+    .nav-links.open { display: flex; }
+
+    #photography, #fashion, #research, #contact { padding: 5rem 1.5rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+
+    .photo-grid { grid-template-columns: 1fr; }
+    .photo-card:nth-child(1),
+    .photo-card:nth-child(4) { grid-column: span 1; }
+
+    .fashion-grid { grid-template-columns: 1fr; }
+
+    .research-card { grid-template-columns: 1fr; }
+    .research-img { aspect-ratio: 16/7; }
+  }
+
+  @media (max-width: 1024px) and (min-width: 769px) {
+    #photography, #fashion, #research, #contact { padding: 6rem 2.5rem; }
+    .photo-grid { grid-template-columns: 1fr 1fr; }
+    .photo-card:nth-child(1),
+    .photo-card:nth-child(4) { grid-column: span 2; }
+    .fashion-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">ZCVault</a>
+  <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="#home" onclick="closeNav()">Home</a></li>
+    <li><a href="#photography" onclick="closeNav()">Photography</a></li>
+    <li><a href="#fashion" onclick="closeNav()">Fashion &amp; Modelling</a></li>
+    <li><a href="#research" onclick="closeNav()">Research &amp; Experience</a></li>
+    <li><a href="#contact" onclick="closeNav()">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="home">
+  <div class="hero-deco hero-deco-1"></div>
+  <div class="hero-deco hero-deco-2"></div>
+
+  <div class="hero-content">
+    <div class="profile-ring">
+      <div class="profile-img">
+        <div class="profile-img-placeholder">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#f8f2eb" stroke-width="1.2">
+            <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+          </svg>
+          <span>Your Photo</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="hero-eyebrow">Welcome to my world</p>
+    <h1 class="hero-title">Zae's <span>Creative</span><br>Vault</h1>
+    <p class="hero-name">[ Your Full Name Here ]</p>
+    <div class="hero-divider"></div>
+    <p class="hero-bio">
+      A multi-disciplinary creative — photographer, model, and researcher — passionate about storytelling through image, style, and knowledge. This is my curated space where art meets intention.
+    </p>
+    <div class="cta-group">
+      <a href="#photography" class="btn-primary">Explore My Work</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── PHOTOGRAPHY ── -->
+<section id="photography">
+  <div class="section-header reveal">
+    <p class="section-label">Portfolio · 01</p>
+    <h2 class="section-title">Photography</h2>
+    <p class="section-subtitle">A visual journey through light, shadow, and story — captured one frame at a time.</p>
+  </div>
+
+  <div class="photo-grid">
+    <!-- Card 1 — wide -->
+    <div class="photo-card reveal reveal-delay-1">
+      <div class="photo-img">
+        <div class="photo-img-inner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4a2e2c" stroke-width="1.2">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="12" cy="12" r="4"/>
+            <path d="M8 4l1-2h6l1 2"/>
+          </svg>
+          <span>Image Placeholder</span>
+        </div>
+      </div>
+      <div class="photo-caption">
+        <h3>Golden Hour Series</h3>
+        <p>Editorial · Landscape Photography</p>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="photo-card reveal reveal-delay-2">
+      <div class="photo-img">
+        <div class="photo-img-inner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4a2e2c" stroke-width="1.2">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="12" cy="12" r="4"/>
+            <path d="M8 4l1-2h6l1 2"/>
+          </svg>
+          <span>Image Placeholder</span>
+        </div>
+      </div>
+      <div class="photo-caption">
+        <h3>Portraits In Still</h3>
+        <p>Fine Art · Portrait Series</p>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="photo-card reveal reveal-delay-1">
+      <div class="photo-img">
+        <div class="photo-img-inner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4a2e2c" stroke-width="1.2">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="12" cy="12" r="4"/>
+            <path d="M8 4l1-2h6l1 2"/>
+          </svg>
+          <span>Image Placeholder</span>
+        </div>
+      </div>
+      <div class="photo-caption">
+        <h3>Urban Textures</h3>
+        <p>Street · Documentary</p>
+      </div>
+    </div>
+
+    <!-- Card 4 — wide -->
+    <div class="photo-card reveal reveal-delay-2">
+      <div class="photo-img">
+        <div class="photo-img-inner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4a2e2c" stroke-width="1.2">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="12" cy="12" r="4"/>
+            <path d="M8 4l1-2h6l1 2"/>
+          </svg>
+          <span>Image Placeholder</span>
+        </div>
+      </div>
+      <div class="photo-caption">
+        <h3>Chasing Dusk</h3>
+        <p>Nature · Long Exposure Series</p>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="photo-card reveal reveal-delay-3">
+      <div class="photo-img">
+        <div class="photo-img-inner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4a2e2c" stroke-width="1.2">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="12" cy="12" r="4"/>
+            <path d="M8 4l1-2h6l1 2"/>
+          </svg>
+          <span>Image Placeholder</span>
+        </div>
+      </div>
+      <div class="photo-caption">
+        <h3>Soft Light</h3>
+        <p>Abstract · Minimal</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FASHION & MODELLING ── -->
+<section id="fashion">
+  <div class="section-header reveal">
+    <p class="section-label">Portfolio · 02</p>
+    <h2 class="section-title">Fashion &amp; Modelling</h2>
+    <p class="section-subtitle">Editorial campaigns and expressive style — where identity meets the lens.</p>
+  </div>
+
+  <div class="fashion-grid">
+    <div class="fashion-card reveal reveal-delay-1">
+      <div class="fashion-img">
+        <div class="fashion-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+          <span>Campaign Image</span>
+        </div>
+      </div>
+      <span class="fashion-tag">Editorial</span>
+      <div class="fashion-info">
+        <h3>Velvet Season</h3>
+        <p>A luxury editorial exploring texture and shadow — rich tones, quiet power, and the art of understated presence.</p>
+      </div>
+    </div>
+
+    <div class="fashion-card reveal reveal-delay-2">
+      <div class="fashion-img">
+        <div class="fashion-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+          <span>Campaign Image</span>
+        </div>
+      </div>
+      <span class="fashion-tag">Campaign</span>
+      <div class="fashion-info">
+        <h3>Baroque Reverie</h3>
+        <p>Inspired by old-world opulence — an editorial campaign that bridges heritage aesthetics with modern minimalism.</p>
+      </div>
+    </div>
+
+    <div class="fashion-card reveal reveal-delay-3">
+      <div class="fashion-img">
+        <div class="fashion-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+          <span>Campaign Image</span>
+        </div>
+      </div>
+      <span class="fashion-tag">Runway</span>
+      <div class="fashion-info">
+        <h3>Bloom &amp; Contrast</h3>
+        <p>A spring collection shoot balancing boldness and softness — structured silhouettes against organic, natural backdrops.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RESEARCH & EXPERIENCE ── -->
+<section id="research">
+  <div class="section-header reveal">
+    <p class="section-label">Portfolio · 03</p>
+    <h2 class="section-title">Research &amp; Experience</h2>
+    <p class="section-subtitle">Academic inquiry, professional work, and curiosity in action — the intellectual side of my story.</p>
+  </div>
+
+  <div class="research-list">
+    <div class="research-card reveal reveal-delay-1">
+      <div class="research-img">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+          <path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/>
+        </svg>
+        <span>Project Image</span>
+      </div>
+      <div class="research-info">
+        <p class="research-date">2024 · Research Paper</p>
+        <h3>Project Title Here</h3>
+        <h4>Subtitle or Institution Name</h4>
+        <p>A concise description of this research project, its goals, methodologies, and key findings. Replace this placeholder with the actual details of your academic or professional work.</p>
+      </div>
+    </div>
+
+    <div class="research-card reveal reveal-delay-2">
+      <div class="research-img">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+          <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+        </svg>
+        <span>Project Image</span>
+      </div>
+      <div class="research-info">
+        <p class="research-date">2023 · Professional Experience</p>
+        <h3>Role / Project Title</h3>
+        <h4>Organization or Company Name</h4>
+        <p>Describe your role, key responsibilities, and impactful outcomes from this experience. This card is perfect for internships, professional projects, or collaborative research endeavors.</p>
+      </div>
+    </div>
+
+    <div class="research-card reveal reveal-delay-3">
+      <div class="research-img">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        </svg>
+        <span>Project Image</span>
+      </div>
+      <div class="research-info">
+        <p class="research-date">2022 · Publication</p>
+        <h3>Publication or Thesis Title</h3>
+        <h4>Journal / Conference / Department</h4>
+        <p>Summarize the key contributions, arguments, or creative outputs of this publication or thesis project. Highlight any awards, recognition, or tangible impact this work has had.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT / CONNECT ── -->
+<section id="contact">
+  <span class="section-label reveal">Connect</span>
+  <h2 class="section-title reveal">Let's Create<br>Together</h2>
+  <p class="section-subtitle reveal">Find me across platforms — collaborations, commissions, and conversations are always welcome.</p>
+
+  <div class="social-row reveal">
+    <!-- Instagram -->
+    <a href="#" class="social-btn" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+      </svg>
+      Instagram
+    </a>
+
+    <!-- TikTok -->
+    <a href="#" class="social-btn" aria-label="TikTok">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+      </svg>
+      TikTok
+    </a>
+  </div>
+
+  <a href="#" class="linkedin-cta reveal" aria-label="LinkedIn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <rect x="2" y="2" width="20" height="20" rx="3"/>
+      <path d="M7 10v7M7 7v.01M12 10v7M12 13a3 3 0 0 1 6 0v4"/>
+    </svg>
+    Let's Connect on LinkedIn
+  </a>
+
+  <p class="contact-email reveal">or reach me at · yourname@email.com</p>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div>
+    <p class="footer-sig">Zae's Creative Vault</p>
+    <p class="footer-tagline">Curated with creativity and vision.</p>
+  </div>
+
+  <div class="footer-socials">
+    <a href="#" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+      </svg>
+    </a>
+    <a href="#" aria-label="TikTok">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+      </svg>
+    </a>
+    <a href="#" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="2" y="2" width="20" height="20" rx="3"/>
+        <path d="M7 10v7M7 7v.01M12 10v7M12 13a3 3 0 0 1 6 0v4"/>
+      </svg>
+    </a>
+  </div>
+
+  <p class="footer-copy">© 2025 Zae's Creative Vault · All Rights Reserved</p>
+</footer>
+
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Mobile nav close
+  function closeNav() {
+    document.querySelector('.nav-links').classList.remove('open');
+  }
+
+  // Smooth nav link active state
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.querySelectorAll('.nav-links a').forEach(l => l.style.color = '');
+    });
+  });
+</script>
+</body>
+</html>
