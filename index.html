@@ -148,40 +148,6 @@
 
   .hero-content { position: relative; z-index: 2; }
 
-  .profile-ring {
-    width: 160px; height: 160px;
-    border-radius: 50%;
-    margin: 0 auto 2rem;
-    padding: 3px;
-    background: linear-gradient(135deg, var(--peach), var(--maroon), var(--lilac));
-    box-shadow: 0 0 40px rgba(234,178,116,0.2);
-  }
-
-  .profile-img {
-    width: 100%; height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    background: #3a2221;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  .profile-img-placeholder {
-    width: 100%; height: 100%;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #3a2221, #5a2e2c);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-
-  .profile-img-placeholder svg { opacity: 0.4; }
-  .profile-img-placeholder span { font-size: 0.6rem; letter-spacing: 0.15em; color: rgba(248,242,235,0.4); text-transform: uppercase; }
-
   .hero-eyebrow {
     font-size: 0.7rem;
     letter-spacing: 0.35em;
@@ -346,6 +312,236 @@
   }
 
   .section-header { margin-bottom: 3.5rem; }
+
+  /* ── INTRODUCTION SECTION ── */
+  #intro {
+    padding: 7rem 4rem;
+    background: var(--warm-white);
+    overflow: hidden;
+  }
+
+  .intro-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .intro-text { }
+
+  .intro-greeting {
+    font-family: var(--font-title);
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: 0.03em;
+    color: var(--ebony);
+    margin-bottom: 0.6rem;
+  }
+
+  .intro-greeting span { color: var(--maroon); }
+
+  .intro-name {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text-dark);
+    margin-bottom: 0.4rem;
+  }
+
+  .intro-role {
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    color: var(--maroon);
+    margin-bottom: 1.6rem;
+  }
+
+  .intro-divider {
+    width: 48px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--maroon), var(--peach));
+    margin-bottom: 1.6rem;
+    border-radius: 1px;
+  }
+
+  .intro-desc {
+    font-size: 0.88rem;
+    font-weight: 300;
+    line-height: 2;
+    color: var(--text-mid);
+    max-width: 440px;
+    text-align: justify;
+  }
+
+  /* ── INTRO SOCIAL BUTTONS ── */
+  .intro-socials {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .intro-socials-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .intro-social-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 30px;
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.3s;
+    white-space: nowrap;
+  }
+
+  .intro-social-pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(46,31,30,0.18);
+  }
+
+  .intro-social-pill svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .intro-pill-linkedin {
+    background: var(--maroon);
+    color: var(--cream);
+    border: 1px solid var(--maroon);
+  }
+
+  .intro-pill-email {
+    background: transparent;
+    color: var(--maroon);
+    border: 1.5px solid var(--maroon);
+  }
+
+  .intro-pill-email:hover {
+    background: rgba(123,30,25,0.06);
+  }
+
+  .intro-socials-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-left: 0.4rem;
+  }
+
+  .intro-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(46,31,30,0.06);
+    border: 1.5px solid rgba(46,31,30,0.14);
+    color: var(--text-dark);
+    text-decoration: none;
+    transition: background 0.25s, border-color 0.25s, transform 0.2s;
+  }
+
+  .intro-icon-btn:hover {
+    background: var(--peach);
+    border-color: var(--peach);
+    transform: translateY(-2px);
+  }
+
+  .intro-icon-btn svg { width: 18px; height: 18px; }
+
+  /* ── INTRO IMAGE FRAME (wireframe-inspired) ── */
+  .intro-image-wrap {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  /* Peach/gold dot-pattern accent — top right corner */
+  .intro-image-wrap::before {
+    content: '';
+    position: absolute;
+    top: -18px;
+    right: -18px;
+    width: 110px;
+    height: 110px;
+    background-image: radial-gradient(circle, var(--peach) 1.5px, transparent 1.5px);
+    background-size: 10px 10px;
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Maroon offset frame — bottom left corner */
+  .intro-image-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: -14px;
+    left: -14px;
+    width: 55%;
+    height: 45%;
+    border: 2px solid var(--maroon);
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .intro-image-frame {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    border: 2px solid rgba(210,202,216,0.6);
+    border-radius: 4px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--lilac), var(--lilac-dark));
+    box-shadow: 0 20px 60px rgba(46,31,30,0.12);
+  }
+
+  .intro-image-frame img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Fallback placeholder if image not found */
+  .intro-image-frame .intro-img-placeholder {
+    width: 100%;
+    aspect-ratio: 1/1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    background: linear-gradient(145deg, #e8dfd4, var(--lilac));
+    opacity: 0.7;
+  }
+
+  .intro-img-placeholder svg { width: 40px; height: 40px; color: var(--text-mid); opacity: 0.5; }
+  .intro-img-placeholder span { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-mid); opacity: 0.5; }
+
+  @media (max-width: 900px) {
+    .intro-layout {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .intro-image-wrap { max-width: 380px; margin: 0 auto; }
+    #intro { padding: 5rem 1.5rem; }
+  }
 
   /* ── PHOTOGRAPHY ── */
   #photography {
@@ -528,9 +724,8 @@
   #experience .section-title { color: var(--ebony); }
   #experience .section-subtitle { color: var(--text-mid); }
 
-  /* Research section — same layout, slightly lighter bg for visual separation */
   #research-projects {
-    padding: 0 4rem 7rem;  /* no top padding — flows directly from experience */
+    padding: 0 4rem 7rem;
     background: var(--cream);
   }
 
@@ -825,6 +1020,7 @@
   </button>
   <ul class="nav-links">
     <li><a href="#home" onclick="closeNav()">Home</a></li>
+    <li><a href="#intro" onclick="closeNav()">About</a></li>
     <li><a href="#photography" onclick="closeNav()">Photography</a></li>
     <li><a href="#fashion" onclick="closeNav()">Fashion &amp; Modelling</a></li>
     <li><a href="#experience" onclick="closeNav()">Experience</a></li>
@@ -839,13 +1035,6 @@
   <div class="hero-deco hero-deco-2"></div>
 
   <div class="hero-content">
-    <div class="profile-ring">
-      <div class="profile-img">
-        <img src="/images/profile/profile.jpg" alt="Zae" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
-        </div>
-      </div>
-    </div>
-
     <p class="hero-eyebrow">Welcome to my world</p>
     <h1 class="hero-title">Zae's <span>Creative</span><br>Vault</h1>
     <p class="hero-name">- Muhammad Zaenal Raffi -</p>
@@ -864,6 +1053,76 @@
   </div>
 </section>
 
+<!-- ── INTRODUCTION ── -->
+<section id="intro">
+  <div class="intro-layout">
+
+    <!-- Left: text -->
+    <div class="intro-text reveal">
+      <h2 class="intro-greeting">Hi! I'm <span>Zae</span></h2>
+      <p class="intro-name">Muhammad Zaenal Raffi</p>
+      <p class="intro-role">Second Year Applied Science Student at UBC</p>
+      <div class="intro-divider"></div>
+      <p class="intro-desc">
+        I'm a Jakarta-born, Vancouver-based creative who moves between worlds — behind the camera, in front of it, and deep in research labs. Whether I'm framing a shot in the rain, styling a streetwear look against the city, or investigating antimicrobial compounds, I bring the same obsessive attention to craft. This vault is where all of it lives together.
+      </p>
+
+      <!-- Social buttons row -->
+      <div class="intro-socials">
+        <!-- Left: pill buttons -->
+        <div class="intro-socials-left">
+          <a href="https://www.linkedin.com/in/muhammad-zaenal-raffi/" class="intro-social-pill intro-pill-linkedin" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="2" y="2" width="20" height="20" rx="3"/>
+              <path d="M7 10v7M7 7v.01M12 10v7M12 13a3 3 0 0 1 6 0v4"/>
+            </svg>
+            Connect on LinkedIn!
+          </a>
+          <a href="mailto:mzaenalraffi27@email.com" class="intro-social-pill intro-pill-email" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="M2 7l10 7 10-7"/>
+            </svg>
+            Email for Business Inquiry
+          </a>
+        </div>
+
+        <!-- Right: icon buttons -->
+        <div class="intro-socials-right">
+          <a href="https://www.instagram.com/zae._raffi/" class="intro-icon-btn" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+            </svg>
+          </a>
+          <a href="https://www.tiktok.com/@marauder_zae" class="intro-icon-btn" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: image with layered border treatment -->
+    <div class="intro-image-wrap reveal reveal-delay-2">
+      <div class="intro-image-frame">
+        <img src="/images/profile/profile.jpg" alt="Muhammad Zaenal Raffi"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <div class="intro-img-placeholder" style="display:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          <span>Profile Photo</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ── PHOTOGRAPHY ── -->
 <section id="photography">
   <div class="section-header reveal">
@@ -873,7 +1132,6 @@
   </div>
 
   <div class="photo-grid">
-    <!-- Card 1 -->
     <div class="photo-card reveal reveal-delay-1">
       <div class="photo-img">
         <img src="/images/photography/night.png" alt="Nightfall Reflection"
@@ -885,7 +1143,6 @@
       </div>
     </div>
 
-    <!-- Card 2 -->
     <div class="photo-card reveal reveal-delay-2">
       <div class="photo-img">
         <img src="/images/photography/rainbow (1).jpg" alt="rainbow1"
@@ -897,7 +1154,6 @@
       </div>
     </div>
 
-    <!-- Card 3 -->
     <div class="photo-card reveal reveal-delay-3">
       <div class="photo-img">
         <img src="/images/photography/well.png" alt="Nightfall Reflection"
@@ -909,7 +1165,6 @@
       </div>
     </div>
 
-    <!-- Card 4 -->
     <div class="photo-card reveal reveal-delay-1">
       <div class="photo-img">
         <img src="/images/photography/loading.png" alt="Nightfall Reflection"
@@ -921,7 +1176,6 @@
       </div>
     </div>
 
-    <!-- Card 5 -->
     <div class="photo-card reveal reveal-delay-2">
       <div class="photo-img">
         <img src="/images/photography/aurora.JPG" alt="Nightfall Reflection"
@@ -933,7 +1187,6 @@
       </div>
     </div>
 
-    <!-- Card 6 -->
     <div class="photo-card reveal reveal-delay-3">
       <div class="photo-img">
         <img src="/images/photography/glow.JPG" alt="Nightfall Reflection"
@@ -945,7 +1198,6 @@
       </div>
     </div>
 
-    <!-- Card 7 -->
     <div class="photo-card reveal reveal-delay-1">
       <div class="photo-img">
         <img src="/images/photography/red.png" alt="Nightfall Reflection"
@@ -957,7 +1209,6 @@
       </div>
     </div>
 
-    <!-- Card 8 -->
     <div class="photo-card reveal reveal-delay-2">
       <div class="photo-img">
         <img src="/images/photography/salt.png" alt="Nightfall Reflection"
@@ -969,7 +1220,6 @@
       </div>
     </div>
 
-    <!-- Card 9 -->
     <div class="photo-card reveal reveal-delay-3">
       <div class="photo-img">
         <img src="/images/photography/sir.png" alt="Nightfall Reflection"
@@ -1006,7 +1256,6 @@
       </div>
     </div>
 
-
     <div class="fashion-card reveal reveal-delay-2">
       <div class="fashion-img">
        <img src="/images/fashion/clean-look.jpg" alt="Clean Look"
@@ -1031,7 +1280,7 @@
       <span class="fashion-tag">Streetwear</span>
       <div class="fashion-info">
         <h3>Concrete Heatwave</h3>
-        <p>Urban layers meet soft sunlight — a fit that turns a simple balcony into a runway. Even in the city’s hard edges, the stance carries that effortless model-off-duty energy.</p>
+        <p>Urban layers meet soft sunlight — a fit that turns a simple balcony into a runway. Even in the city's hard edges, the stance carries that effortless model-off-duty energy.</p>
       </div>
     </div>
     
@@ -1073,7 +1322,7 @@
       <span class="fashion-tag">Looks</span>
       <div class="fashion-info">
         <h3>Hallway Shutdown  </h3>
-        <p>When the day hits too hard, even a campus hallway becomes a runway for exhaustion. Streetwear stays on point, but the vibe says “model off‑duty… way off.”</p>
+        <p>When the day hits too hard, even a campus hallway becomes a runway for exhaustion. Streetwear stays on point, but the vibe says "model off‑duty… way off."</p>
       </div>
     </div>
   </div>
@@ -1097,7 +1346,7 @@
         <p class="research-date">2026 · Marketing</p>
         <h3>Seasonal Brand Associate (Summer)</h3>
         <h4>Old Navy Outlet (GAP Inc.) - McArthur Glen</h4>
-        <p>Promoted and marketed Old Navy products to outlet shoppers during peak summer season. Delivered an excellent customer experience by warmly greeting customers, assisting with product selection and styling recommendations, and ensuring smooth checkout through accurate transaction processing. Supported the store’s commercial goals by maintaining high standards of merchandising—keeping displays organized, stocked, and visually appealing. Focused on providing fast, friendly service while helping the team meet and exceed sales targets 
+        <p>Promoted and marketed Old Navy products to outlet shoppers during peak summer season. Delivered an excellent customer experience by warmly greeting customers, assisting with product selection and styling recommendations, and ensuring smooth checkout through accurate transaction processing. Supported the store's commercial goals by maintaining high standards of merchandising—keeping displays organized, stocked, and visually appealing. Focused on providing fast, friendly service while helping the team meet and exceed sales targets 
         </p>
        </div>
  </div>
@@ -1219,7 +1468,6 @@ interdisciplinary healthcare workflows</p>
   <p class="section-subtitle reveal">Find me across platforms — collaborations, commissions, and conversations are always welcome.</p>
 
   <div class="social-row reveal">
-    <!-- Instagram -->
     <a href="https://www.instagram.com/zae._raffi/" class="social-btn" aria-label="Instagram">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/>
@@ -1228,7 +1476,6 @@ interdisciplinary healthcare workflows</p>
       Instagram
     </a>
 
-    <!-- TikTok -->
     <a href="https://www.tiktok.com/@marauder_zae" class="social-btn" aria-label="TikTok">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
